@@ -12,7 +12,7 @@ CREATE TABLE users(
     name TEXT,
     age INTEGER
 );
-"SELECT users.name, users.age, pledges.amount FROM pledges INNER JOIN users ON pledges.user_id = users.id GROUP BY users.name"
+
 
 CREATE TABLE pledges(
     id INTEGER PRIMARY KEY, 
