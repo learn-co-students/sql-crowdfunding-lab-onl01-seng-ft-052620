@@ -25,12 +25,12 @@ def selects_the_user_name_age_and_pledge_amount_for_all_pledges_alphabetized_by_
 end
 
 def selects_the_titles_and_amount_over_goal_of_all_projects_that_have_met_their_funding_goal
-  "SELECT projects.title, (SUM(pledges.amount) - projects.funding_goal)
+  "SELECT projects.title, (SUM(pledges.amount) - projects.funding_goal) AS amount_over_goal
   FROM projects
   INNER JOIN pledges
   WHERE projects.id == pledges.project_id
   GROUP BY projects.title
-  HAVING SUM(pledges.amount) >= projects.funding_goal;"
+  HAVING amount_over_goal >= 0;"
 end
 
 def selects_user_names_and_amounts_of_all_pledges_grouped_by_name_then_orders_them_by_the_summed_amount
@@ -52,6 +52,8 @@ end
 def selects_the_category_name_and_the_sum_total_of_the_all_its_pledges_for_the_books_category
   "SELECT projects.category, SUM(pledges.amount)
   FROM projects
-  INNER JOIN pledges ON projects.id == pledges.project_id
-  WHERE projects.category == 'books';"
+  INNER JOIN pledges 
+  ON projects.id == pledges.project_id
+  WHERE projects.category == 'books'
+  GROUP BY projects.category;"
 end
